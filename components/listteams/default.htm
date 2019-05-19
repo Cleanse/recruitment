@@ -1,0 +1,50 @@
+<div class="basic-page">
+    <div class="container">
+        <div class="page-title">
+            <p class="text-small mb-0"><a href="/recruitment">Recruitment</a></p>
+            <h1>Teams Recruiting</h1>
+            <div class="sub-box"></div>
+            <p class="mt-1 small text-primary">Looking for a team? Browse below!</p>
+        </div>
+    </div>
+
+    <div class="container basic-content">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="pvp-table">
+                    <div class="table text-white">
+                        <div class="thead">
+                            <span>Roles Needed</span>
+                            <span>Name</span>
+                            <span>Data Center</span>
+                        </div>
+                        {% for team in teams %}
+                        <a class="tr" href="/recruitment/team/{{ team.slug }}">
+                            <span>
+                                {% for role in team.roles %}
+                                <img src="/"
+                                {% endfor %}
+                            </span>
+                            <span>{{ ranking.rating }}</span>
+                            <span>{{ ranking.player.name }}</span>
+                            <span>{{ ranking.player.data_center }}</span>
+                            <span>{{ ranking.player.server }}</span>
+                        </a>
+                        {% else %}
+                        <div class="p-3">
+                            <a href="/recruitment/create/team">Create A Team Profile</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 side-bar">
+                <h4>Filter</h4>
+                <div class="sub-box mb-4"></div>
+                Role
+                Datacenter
+            </div>
+        </div>
+    </div>
+</div>

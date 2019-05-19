@@ -1,0 +1,42 @@
+<div class="basic-page">
+    <div class="container">
+        <div class="page-title">
+            <h1>Recruitment</h1>
+            <div class="sub-box"></div>
+            <p class="mt-1 small text-primary">Interested in Light Party Feast?</p>
+        </div>
+    </div>
+
+    <div class="container basic-content">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="text-center mb-2">
+                    <img class="img-fluid" src="/plugins/cleanse/recruitment/assets/images/recruitment-board.jpg">
+                </div>
+
+                <a class="btn btn-outline-primary btn-block" href="/recruitment/teams">Browse Teams Recruiting</a>
+                <a class="btn btn-outline-primary btn-block" href="/recruitment/players">Find Teammates</a>
+            </div>
+
+            <div class="col-lg-4 side-bar">
+                {% if not user %}
+                <h4>Login/Register</h4>
+                <div class="sub-box mb-4"></div>
+                <a class="btn btn-outline-primary btn-block" href="/account">Create PvPaissa Account</a>
+
+                <a class="btn btn-primary btn-block" href="/account">Login</a>
+                {% else %}
+                <h6>Welcome, {{ user.name }}</h6>
+                {% if user.recruitment %}
+                ==Recruitment data==
+                <a class="btn btn-outline-primary btn-block"
+                   href="/recruitment/profile">Update your Recruitment Profile</a>
+                {% else %}
+                <a class="btn btn-outline-primary btn-block"
+                   href="/recruitment/profile">Setup your Recruitment Profile</a>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
