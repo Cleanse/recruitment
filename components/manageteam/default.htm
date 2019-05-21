@@ -1,0 +1,34 @@
+<div class="basic-page">
+    <div class="container">
+        <div class="page-title">
+            <p class="text-small mb-0"><a href="/recruitment">Recruitment</a></p>
+            <h1>Manage Team</h1>
+            <div class="sub-box"></div>
+            <p class="mt-1 small text-primary">Edit a team profile so you may recruit others.</p>
+        </div>
+    </div>
+
+    <div class="container basic-content">
+        <div class="row">
+            <div class="col-lg-8">
+                {% partial __SELF__~'::update' %}
+            </div>
+
+            <div class="col-lg-4 side-bar">
+                <h6>Welcome, {{ user.name }}</h6>
+                <div class="sub-box mb-4"></div>
+
+                <button class="btn btn-outline-danger pull-right"
+                        data-request="onStopRecruiting"
+                        data-request-data="team_id: {{ team.id }}"
+                        data-request-confirm="Are you sure you want to change the recruitment status?">
+                    {% if team.recruiting %}
+                    Stop Recruiting
+                    {% else %}
+                    Start Recruiting
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

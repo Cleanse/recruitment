@@ -19,21 +19,22 @@
                             <span>Data Center</span>
                         </div>
                         {% for team in teams %}
-                        <a class="tr" href="/recruitment/team/{{ team.slug }}">
+                        <a class="tr recruitment-team-link" href="/recruitment/team/{{ team.slug }}">
                             <span>
-                                {% for role in team.roles %}
-                                <img src="/"
+                                {% for role in team.availability %}
+                                <img class="recruitment-role-icon"
+                                     src="/plugins/cleanse/recruitment/assets/images/role-{{ role }}.png">
                                 {% endfor %}
                             </span>
-                            <span>{{ ranking.rating }}</span>
-                            <span>{{ ranking.player.name }}</span>
-                            <span>{{ ranking.player.data_center }}</span>
-                            <span>{{ ranking.player.server }}</span>
+                            <span>{{ team.name }}</span>
+                            <span>{{ team.datacenter|capitalize }}</span>
                         </a>
                         {% else %}
-                        <div class="p-3">
-                            <a href="/recruitment/create/team">Create A Team Profile</a>
-                        </div>
+                        <span></span>
+                        <span class="p-3">
+                            No teams match this criteria.
+                        </span>
+                        <span></span>
                         {% endfor %}
                     </div>
                 </div>
@@ -42,8 +43,32 @@
             <div class="col-lg-4 side-bar">
                 <h4>Filter</h4>
                 <div class="sub-box mb-4"></div>
-                Role
-                Datacenter
+                <p class="mb-0"><strong>By Role:</strong></p>
+                <ul>
+                    <li><a href="/recruitment/teams/role/tank">Tank</a></li>
+                    <li><a href="/recruitment/teams/role/healer">Healer</a></li>
+                    <li><a href="/recruitment/teams/role/melee">Melee</a></li>
+                    <li><a href="/recruitment/teams/role/ranged">Ranged</a></li>
+                </ul>
+
+                <p class="mb-0"><strong>By Datacenter:</strong></p>
+                <ul>
+                    <li><a href="/recruitment/teams/datacenter/aether">Aether</a></li>
+                    <li><a href="/recruitment/teams/datacenter/chaos">Chaos</a></li>
+                    <li><a href="/recruitment/teams/datacenter/crystal">Crystal</a></li>
+                    <li><a href="/recruitment/teams/datacenter/elemental">Elemental</a></li>
+                    <li><a href="/recruitment/teams/datacenter/gaia">Gaia</a></li>
+                    <li><a href="/recruitment/teams/datacenter/light">Light</a></li>
+                    <li><a href="/recruitment/teams/datacenter/mana">Mana</a></li>
+                    <li><a href="/recruitment/teams/datacenter/primal">Primal</a></li>
+                </ul>
+
+                <p class="mb-0"><strong>By Region:</strong></p>
+                <ul>
+                    <li><a href="/recruitment/teams/region/eu">Europe</a></li>
+                    <li><a href="/recruitment/teams/region/jp">Japan</a></li>
+                    <li><a href="/recruitment/teams/region/na">North America</a></li>
+                </ul>
             </div>
         </div>
     </div>

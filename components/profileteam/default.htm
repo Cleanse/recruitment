@@ -1,0 +1,47 @@
+<div class="basic-page">
+    <div class="container">
+        <div class="page-title">
+            <p class="text-small text-white">
+                <a href="/recruitment">Recruitment</a> &gt; <a href="/recruitment/teams">Teams</a>
+            </p>
+            <h1>{{ team.name }}</h1>
+            <div class="sub-box"></div>
+            <p class="mt-1 small text-primary">
+                <a href="/recruitment/teams/datacenter/{{ team.datacenter }}">{{ team.datacenter|capitalize }}</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="container basic-content">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3 class="mb-1">{{ team.name }}'s Profile</h3>
+
+                <hr>
+
+                <h6>We are looking for:</h6>
+                <div class="mb-3">
+                    {% for role in team.availability %}
+                    <img class="recruitment-role-icon"
+                         src="/plugins/cleanse/recruitment/assets/images/role-{{ role }}.png">
+                    {% endfor %}
+                </div>
+
+                <h6>Datacenter:</h6>
+                <p>
+                    <a href="/recruitment/teams/datacenter/{{ team.datacenter }}">{{ team.datacenter|capitalize }}</a>
+                </p>
+
+                <h6>Contact:</h6>
+                <p>{{ team.contact_method|nl2br }}</p>
+
+                <h6>Information:</h6>
+                <p>{{ team.description|nl2br }}</p>
+            </div>
+
+            <div class="col-lg-4 side-bar">
+                {% component 'cleanseRecruitmentReport' %}
+            </div>
+        </div>
+    </div>
+</div>

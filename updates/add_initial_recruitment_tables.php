@@ -9,32 +9,38 @@ class AddInitialRecruitmentTables extends Migration
 {
     public function up()
     {
-        Schema::create('cleanse_recruitment_players', function($table)
-        {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->string('name');
-            $table->string('region');
-            $table->json('roles');
-            $table->text('availability');
-            $table->text('contact_method');
-            $table->boolean('recruited')->default(false);
-            $table->timestamps();
-        });
-
         Schema::create('cleanse_recruitment_teams', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->string('name');
+            $table->string('slug');
+            $table->string('datacenter');
+            $table->text('contact_method');
+            $table->text('description');
+            $table->json('availability');
+            $table->boolean('recruiting')->default(false);
+            $table->timestamps();
+        });
+
+        Schema::create('cleanse_recruitment_players', function($table)
+        {
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('character_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('region');
-            $table->text('availability');
+            $table->string('datacenter');
+            $table->json('roles');
             $table->text('contact_method');
+            $table->text('profile');
             $table->boolean('recruited')->default(false);
             $table->timestamps();
         });
 
-        Schema::create('cleanse_recruitment_player_team', function($table)
+        Schema::create('cleanse_recruitment_reports', function($table)
         {
             $table->integer('player_id')->unsigned();
             $table->integer('team_id')->unsigned();

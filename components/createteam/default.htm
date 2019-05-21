@@ -11,48 +11,12 @@
     <div class="container basic-content">
         <div class="row">
             <div class="col-lg-8">
-                <form data-request="onCreateTeam"
-                      data-request-validate>
-
-                    <div class="alert alert-danger d-none" role="alert" data-validate-error>
-                        <p class="mb-0" data-message></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="event-title">Event Title</label>
-                        <input id="event-title" name="event-title" type="text" class="form-control" placeholder="Event Title">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="event-description">Event Description</label>
-                        <textarea id="event-description" name="event-description" class="form-control"></textarea>
-                    </div>
-
-                    <hr>
-
-                    <div class="form-group">
-                        <label for="event-type">Event Type</label>
-                        <select id="event-type" name="event-type" class="form-control">
-                            <option value="" selected>Select One</option>
-                            {% for type in event_types %}
-                            <option value="{{ type.value }}">{{ type.display }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div id="event-config"></div>
-
-                    <button type="submit" class="btn btn-info">
-                        Next
-                    </button>
-
-                </form>
+                {% partial __SELF__~'::create' %}
             </div>
 
             <div class="col-lg-4 side-bar">
                 <h6>Welcome, {{ user.name }}</h6>
                 <div class="sub-box mb-4"></div>
-                Create
             </div>
         </div>
     </div>

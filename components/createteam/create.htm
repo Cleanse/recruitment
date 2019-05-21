@@ -1,0 +1,61 @@
+<form data-request="onCreateTeam">
+    <div class="form-group">
+        <label for="name">Team Name</label>
+        <input id="name" name="name" type="text" class="form-control" placeholder="Team Name">
+    </div>
+
+    <div class="form-group">
+        <label for="datacenter">Team Datacenter</label>
+        <select id="datacenter" name="datacenter" class="form-control">
+            <option value="" selected>Select One</option>
+            <option value="aether">Aether</option>
+            <option value="chaos">Chaos</option>
+            <option value="crystal">Crystal</option>
+            <option value="elemental">Elemental</option>
+            <option value="gaia">Gaia</option>
+            <option value="light">Light</option>
+            <option value="mana">Mana</option>
+            <option value="primal">Primal</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="contact">Team Contact Preference</label>
+        <textarea id="contact" name="contact" class="form-control"></textarea>
+        <small class="form-text text-muted">
+            Your preferred way of being contacted, eg: Discord ID/Server, Email, etc.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Team Description</label>
+        <textarea id="description" name="description" class="form-control"></textarea>
+        <small class="form-text text-muted">
+            Anything else you want to say to applicants, preferred language, voice req, etc.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <p class="mb-0">What role(s) are you recruiting?</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="tankCheckbox" value="tank">
+            <label class="form-check-label" for="tankCheckbox">Tank</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="healerCheckbox" value="healer">
+            <label class="form-check-label" for="healerCheckbox">Healer</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="meleeCheckbox" value="melee">
+            <label class="form-check-label" for="meleeCheckbox">Melee</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="rangedCheckbox" value="ranged">
+            <label class="form-check-label" for="rangedCheckbox">Ranged</label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Create
+    </button>
+</form>

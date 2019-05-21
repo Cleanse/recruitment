@@ -1,0 +1,66 @@
+<form data-request="onUpdateTeam">
+    <input type="hidden" name="team_id" value="{{ team.id }}">
+
+    <div class="form-group">
+        <label for="name">Team Name</label>
+        <input type="text" id="name" name="name" class="form-control" placeholder="Team Name" value="{{ team.name }}">
+    </div>
+
+    <div class="form-group">
+        <label for="datacenter">Team Datacenter</label>
+        <select id="datacenter" name="datacenter" class="form-control">
+            <option value="aether"{% if team.datacenter == 'aether' %} selected{% endif %}>Aether</option>
+            <option value="chaos"{% if team.datacenter == 'chaos' %} selected{% endif %}>Chaos</option>
+            <option value="crystal"{% if team.datacenter == 'crystal' %} selected{% endif %}>Crystal</option>
+            <option value="elemental"{% if team.datacenter == 'elemental' %} selected{% endif %}>Elemental</option>
+            <option value="gaia"{% if team.datacenter == 'gaia' %} selected{% endif %}>Gaia</option>
+            <option value="light"{% if team.datacenter == 'light' %} selected{% endif %}>Light</option>
+            <option value="mana"{% if team.datacenter == 'mana' %} selected{% endif %}>Mana</option>
+            <option value="primal"{% if team.datacenter == 'primal' %} selected{% endif %}>Primal</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="contact">Preferred Contact Method</label>
+        <textarea id="contact" name="contact" class="form-control">{{ team.contact_method }}</textarea>
+        <small class="form-text text-muted">
+            Your preferred way of being contacted, eg: Discord ID/Server, Email, etc.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Team Description</label>
+        <textarea id="description" name="description" class="form-control" rows="3">{{ team.description }}</textarea>
+        <small class="form-text text-muted">
+            Anything else you want to say to applicants, preferred language, voice req, etc.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <p class="mb-0">What role(s) are you recruiting?</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="tankCheckbox"
+                   value="tank"{% if 'tank' in team.availability %} checked{% endif %}>
+            <label class="form-check-label" for="tankCheckbox">Tank</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="healerCheckbox"
+                   value="healer"{% if 'healer' in team.availability %} checked{% endif %}>
+            <label class="form-check-label" for="healerCheckbox">Healer</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="meleeCheckbox"
+                   value="melee"{% if 'melee' in team.availability %} checked{% endif %}>
+            <label class="form-check-label" for="meleeCheckbox">Melee</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="rangedCheckbox"
+                   value="ranged"{% if 'ranged' in team.availability %} checked{% endif %}>
+            <label class="form-check-label" for="rangedCheckbox">Ranged</label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Update
+    </button>
+</form>

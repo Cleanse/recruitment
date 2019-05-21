@@ -26,17 +26,18 @@ class Plugin extends PluginBase
         return [
             //public
             'Cleanse\Recruitment\Components\Home' => 'cleanseRecruitmentHome',
+            'Cleanse\Recruitment\Components\Report' => 'cleanseRecruitmentReport',
             
-            'Cleanse\Recruitment\Components\PlayerCreate' => 'cleanseRecruitmentCreatePlayer',
-            'Cleanse\Recruitment\Components\PlayerProfile' => 'cleanseRecruitmentProfilePlayer',
-            'Cleanse\Recruitment\Components\ListPlayers' => 'cleanseRecruitmentListPlayers',
-
-            'Cleanse\Recruitment\Components\CreateTeam' => 'cleanseRecruitmentCreateTeam',
-            'Cleanse\Recruitment\Components\TeamProfile' => 'cleanseRecruitmentProfileTeam',
+            //'Cleanse\Recruitment\Components\ProfilePlayer' => 'cleanseRecruitmentProfilePlayer',
+            //'Cleanse\Recruitment\Components\ListPlayers' => 'cleanseRecruitmentListPlayers',
+            
+            'Cleanse\Recruitment\Components\ProfileTeam' => 'cleanseRecruitmentProfileTeam',
             'Cleanse\Recruitment\Components\ListTeams' => 'cleanseRecruitmentListTeams',
 
-            //user
+            //Requires Auth
+            'Cleanse\Recruitment\Components\CreateTeam' => 'cleanseRecruitmentCreateTeam',
             'Cleanse\Recruitment\Components\ManageTeam' => 'cleanseRecruitmentManageTeam',
+            'Cleanse\Recruitment\Components\CreatePlayer' => 'cleanseRecruitmentCreatePlayer',
             'Cleanse\Recruitment\Components\ManagePlayer' => 'cleanseRecruitmentManagePlayer',
 
             //admin - move into /backend?
