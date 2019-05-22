@@ -1,7 +1,9 @@
 <div class="basic-page">
     <div class="container">
         <div class="page-title">
-            <p class="text-small mb-0"><a href="/recruitment">Recruitment</a></p>
+            <p class="mb-0 text-small text-white">
+                <a href="/recruitment">Recruitment</a> &gt; <a href="/recruitment/profile">My Profile</a>
+            </p>
             <h1>Manage Team</h1>
             <div class="sub-box"></div>
             <p class="mt-1 small text-primary">Edit a team profile so you may recruit others.</p>
@@ -15,18 +17,31 @@
             </div>
 
             <div class="col-lg-4 side-bar">
-                <h6>Welcome, {{ user.name }}</h6>
+                <h4>Welcome, {{ user.name }}</h4>
                 <div class="sub-box mb-4"></div>
-
-                <button class="btn btn-outline-danger pull-right"
+                {% if team.recruiting %}
+                {% set r_status = 'warning' %}
+                {% else %}
+                {% set r_status = 'success' %}
+                {% endif %}
+                <p>If you have recruited a full roster, you may pause recruiting.</p>
+                <button class="btn btn-outline-{{ r_status }} btn-block mb-3 pull-right"
                         data-request="onStopRecruiting"
                         data-request-data="team_id: {{ team.id }}"
                         data-request-confirm="Are you sure you want to change the recruitment status?">
                     {% if team.recruiting %}
-                    Stop Recruiting
+                    Pause Recruiting
                     {% else %}
                     Start Recruiting
                     {% endif %}
+                </button>
+
+                <p>If you wish to delete your team, click the button below and accept the confirmation.</p>
+                <button class="btn btn-outline-danger btn-block pull-right"
+                        data-request="onDeleteTeam"
+                        data-request-data="team_id: {{ team.id }}"
+                        data-request-confirm="Are you sure you want to delete this team?">
+                    Delete {{ team.name }}
                 </button>
             </div>
         </div>
