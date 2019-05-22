@@ -40,6 +40,8 @@ class ManageTeam extends ComponentBase
         }
 
         $this->page['team'] = $team;
+
+        $this->addCss('assets/css/recruitment.css');
     }
 
     public function onUpdateTeam()
@@ -64,6 +66,14 @@ class ManageTeam extends ComponentBase
         }
 
         return Redirect::to('/recruitment/team/' . $team->slug . '/manage');
+    }
+
+    public function onDeleteTeam()
+    {
+        $post = post();
+        $this->deleteTeam($post);
+
+        return Redirect::to('/recruitment');
     }
 
     private function getTeam($slug)
@@ -116,5 +126,19 @@ class ManageTeam extends ComponentBase
         $updateTeam->save();
 
         return $updateTeam;
+    }
+
+    private function deleteTeam($post)
+    {
+        $deleteTeam = Team::where([
+            'id' => $post['team_id'],
+            'user_id' => Auth::getUser()->id
+        ])->first();
+
+        if (!isset($deleteTeam)) {
+            return false;
+        }
+
+        $deleteTeam->delete();
     }
 }
