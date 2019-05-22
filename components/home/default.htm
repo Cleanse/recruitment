@@ -1,7 +1,7 @@
 <div class="basic-page">
     <div class="container">
         <div class="page-title">
-            <h1>Recruitment</h1>
+            <h1>Recruitment Board</h1>
             <div class="sub-box"></div>
             <p class="mt-1 small text-primary">Interested in Light Party Feast?</p>
         </div>
@@ -10,8 +10,8 @@
     <div class="container basic-content">
         <div class="row">
             <div class="col-lg-8">
-                <div class="text-center mb-2">
-                    <img class="img-fluid" src="/plugins/cleanse/recruitment/assets/images/recruitment-board.jpg">
+                <div class="mb-2 text-center">
+                    <img class="img-fluid-100" src="/plugins/cleanse/recruitment/assets/images/recruitment-board.jpg">
                 </div>
 
                 <a class="btn btn-outline-primary btn-block" href="/recruitment/teams">Browse Teams Recruiting</a>
@@ -19,23 +19,49 @@
             </div>
 
             <div class="col-lg-4 side-bar">
-                {% if not user %}
+            {% if not user %}
                 <h4>Login/Register</h4>
-                <div class="sub-box mb-4"></div>
+                <div class="mb-4 sub-box"></div>
                 <a class="btn btn-outline-primary btn-block" href="/account">Create PvPaissa Account</a>
 
                 <a class="btn btn-primary btn-block" href="/account">Login</a>
+            {% else %}
+                <h4>Welcome, {{ user.name }}</h4>
+                <div class="mb-4 sub-box"></div>
+                {% if user_teams.count > 0 %}
+                <div class="category-group">
+                    {% for user_team in user_teams %}
+                    <a class="category-group-item d-flex justify-content-between align-items-center"
+                       href="/recruitment/team/{{ user_team.slug }}/manage">
+                        Manage {{ user_team.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+                <a class=" mt-2 btn btn-outline-primary btn-sm btn-block"
+                   href="/recruitment/create/team">Create Another Team</a>
                 {% else %}
-                <h6>Welcome, {{ user.name }}</h6>
-                {% if user.recruitment %}
-                ==Recruitment data==
-                <a class="btn btn-outline-primary btn-block"
-                   href="/recruitment/profile">Update your Recruitment Profile</a>
+                <a class="btn btn-outline-primary btn-sm btn-block"
+                   href="/recruitment/create/team">Create A Team</a>
+                {% endif %}
+
+                <hr>
+
+                {% if user_characters.count > 0 %}
+                <div class="category-group">
+                    {% for user_character in user_characters %}
+                    <a class="category-group-item d-flex justify-content-between align-items-center"
+                       href="/recruitment/player/{{ user_character.slug }}/manage">
+                        Manage {{ user_character.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+                <a class="mt-2 btn btn-outline-primary btn-sm btn-block"
+                   href="/recruitment/create/player">Create Another Player</a>
                 {% else %}
-                <a class="btn btn-outline-primary btn-block"
-                   href="/recruitment/profile">Setup your Recruitment Profile</a>
+                <a class="btn btn-outline-primary btn-sm btn-block"
+                   href="/recruitment/create/player">Create A Player</a>
                 {% endif %}
-                {% endif %}
+            {% endif %}
             </div>
         </div>
     </div>

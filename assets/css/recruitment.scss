@@ -1,0 +1,47 @@
+.img-fluid-100 {
+  width: 100%;
+  height: auto;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.recruitment-role-icon {
+  height: 36px;
+  width: 36px;
+}
+
+.recruitment-team-link {
+  span:first-child,
+  span:last-child {
+    width: 25%;
+  }
+}
+
+.recruitment-team-link:hover {
+  span:nth-child(2) {
+    text-decoration: underline;
+  }
+}
+
+.side-bar .category-group-item:hover {
+  text-decoration: none;
+}
+
+.btn {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.team-profile:after {
+  content: '...';
+  display: block;
+  margin: 0 auto;
+  color: #393F4D;
+  position: relative;
+  font-size: 30px;
+  letter-spacing: .75em;
+  text-align: center;
+}
