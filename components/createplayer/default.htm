@@ -1,0 +1,25 @@
+<div class="basic-page">
+    <div class="container">
+        <div class="page-title">
+            <p class="mb-0 text-small text-white">
+                <a href="/recruitment">Recruitment</a> &gt; <a href="/recruitment/profile">My Profile</a>
+            </p>
+            <h1>Create Player</h1>
+            <div class="sub-box"></div>
+            <p class="mt-1 small text-primary">Create a player profile for the Recruitment Board.</p>
+        </div>
+    </div>
+
+    <div class="container basic-content">
+        <div class="row">
+            <div class="col-lg-8">
+                {% partial __SELF__~'::create' %}
+            </div>
+
+            <div class="col-lg-4 side-bar">
+                <h6>Welcome, {{ user.name }}</h6>
+                <div class="sub-box mb-4"></div>
+            </div>
+        </div>
+    </div>
+</div>

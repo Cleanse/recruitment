@@ -1,0 +1,57 @@
+<form data-request="onCreatePlayer">
+    <div class="form-group">
+        <label for="name">Character Name</label>
+        <input id="name" name="name" type="text" class="form-control" placeholder="Character Name">
+    </div>
+
+    <div class="form-group">
+        <label for="server">Server</label>
+        <select id="server" name="server" class="form-control">
+            <option value="" selected>Select One</option>
+            {% for server in servers %}
+            <option value="{{ server|lower }}">{{ server }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <p class="mb-0">What role(s) do you PvP as?</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="tankCheckbox" value="tank">
+            <label class="form-check-label" for="tankCheckbox">Tank</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="healerCheckbox" value="healer">
+            <label class="form-check-label" for="healerCheckbox">Healer</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="meleeCheckbox" value="melee">
+            <label class="form-check-label" for="meleeCheckbox">Melee</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="rangedCheckbox" value="ranged">
+            <label class="form-check-label" for="rangedCheckbox">Ranged</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="contact">Preferred Contact Method</label>
+        <textarea id="contact" name="contact" class="form-control"></textarea>
+        <small class="form-text text-muted">
+            Your preferred way of being contacted, eg: Discord ID/Server, Email, etc.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Your Experience and Goals</label>
+        <textarea id="description" name="description" class="form-control"></textarea>
+        <small class="form-text text-muted">
+            Anything you want to say to recruits: <a href="https://na.finalfantasyxiv.com/lodestone/character/">Your
+            character's lodestone URL</a>, spoken language(s), voice availability, etc.
+        </small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Create
+    </button>
+</form>
