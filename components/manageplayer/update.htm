@@ -1,15 +1,17 @@
-<form data-request="onCreatePlayer">
+<form data-request="onUpdatePlayer">
+    <input type="hidden" name="player_id" value="{{ player.id }}">
+
     <div class="form-group">
-        <label for="name">Character Name</label>
-        <input id="name" name="name" type="text" class="form-control" placeholder="Character Name">
+        <label for="name">Player Name</label>
+        <input type="text" id="name" name="name" class="form-control" placeholder="Player Name"
+               value="{{ player.name }}">
     </div>
 
     <div class="form-group">
         <label for="server">Server</label>
         <select id="server" name="server" class="form-control">
-            <option value="" selected>Select One</option>
             {% for server in servers %}
-            <option value="{{ server|lower }}">{{ server }}</option>
+            <option value="{{ server|lower }}"{% if server|lower == player.server %} selected{% endif %}>{{ server }}</option>
             {% endfor %}
         </select>
     </div>
@@ -17,26 +19,30 @@
     <div class="form-group">
         <p class="mb-0">What role(s) do you PvP as?</p>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" name="roles[]" type="checkbox" id="tankCheckbox" value="tank">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="tankCheckbox"
+                   value="tank"{% if 'tank' in player.roles %} checked{% endif %}>
             <label class="form-check-label" for="tankCheckbox">Tank</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" name="roles[]" type="checkbox" id="healerCheckbox" value="healer">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="healerCheckbox"
+                   value="healer"{% if 'healer' in player.roles %} checked{% endif %}>
             <label class="form-check-label" for="healerCheckbox">Healer</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" name="roles[]" type="checkbox" id="meleeCheckbox" value="melee">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="meleeCheckbox"
+                   value="melee"{% if 'melee' in player.roles %} checked{% endif %}>
             <label class="form-check-label" for="meleeCheckbox">Melee</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" name="roles[]" type="checkbox" id="rangedCheckbox" value="ranged">
+            <input class="form-check-input" name="roles[]" type="checkbox" id="rangedCheckbox"
+                   value="ranged"{% if 'ranged' in player.roles %} checked{% endif %}>
             <label class="form-check-label" for="rangedCheckbox">Ranged</label>
         </div>
     </div>
 
     <div class="form-group">
         <label for="contact">Preferred Contact Method</label>
-        <textarea id="contact" name="contact" class="form-control"></textarea>
+        <textarea id="contact" name="contact" class="form-control">{{ player.contact_method }}</textarea>
         <small class="form-text text-muted">
             Your preferred way of being contacted, eg: Discord ID/Server, Email, etc.
         </small>
@@ -44,7 +50,7 @@
 
     <div class="form-group">
         <label for="description">Your Experience and Goals</label>
-        <textarea id="description" name="description" class="form-control"></textarea>
+        <textarea id="description" name="description" class="form-control">{{ player.profile }}</textarea>
         <small class="form-text text-muted">
             Anything you want to say to potential teams: <a href="https://na.finalfantasyxiv.com/lodestone/character/">
             Your character's lodestone URL</a>, spoken language(s), voice availability, etc.
@@ -52,6 +58,6 @@
     </div>
 
     <button type="submit" class="btn btn-primary">
-        Create
+        Update
     </button>
 </form>

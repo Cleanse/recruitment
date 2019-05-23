@@ -1,0 +1,49 @@
+<div class="basic-page">
+    <div class="container">
+        <div class="page-title">
+            <p class="mb-0 text-small text-white">
+                <a href="/recruitment">Recruitment</a> &gt; <a href="/recruitment/profile">My Profile</a>
+            </p>
+            <h1>Manage Player</h1>
+            <div class="sub-box"></div>
+            <p class="mt-1 small text-primary">Edit player profile so you may be recruited.</p>
+        </div>
+    </div>
+
+    <div class="container basic-content">
+        <div class="row">
+            <div class="col-lg-8">
+                {% partial __SELF__~'::update' %}
+            </div>
+
+            <div class="col-lg-4 side-bar">
+                <h4>Welcome, {{ user.name }}</h4>
+                <div class="sub-box mb-4"></div>
+                {% if player.recruited %}
+                {% set r_status = 'success' %}
+                {% else %}
+                {% set r_status = 'warning' %}
+                {% endif %}
+                <p>If you have found a team, you may pause your status.</p>
+                <button class="btn btn-outline-{{ r_status }} btn-block mb-3 pull-right"
+                        data-request="onStopRecruiting"
+                        data-request-data="player_id: {{ player.id }}"
+                        data-request-confirm="Are you sure you want to change your recruitment status?">
+                    {% if player.recruited %}
+                    Open Recruitment
+                    {% else %}
+                    Pause Recruitment
+                    {% endif %}
+                </button>
+
+                <p>If you wish to delete your character, click the button below and accept the confirmation.</p>
+                <button class="btn btn-outline-danger btn-block pull-right"
+                        data-request="onDeletePlayer"
+                        data-request-data="player_id: {{ player.id }}"
+                        data-request-confirm="Are you sure you want to delete this character?">
+                    Delete {{ player.name }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
