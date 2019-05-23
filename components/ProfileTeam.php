@@ -38,6 +38,8 @@ class ProfileTeam extends ComponentBase
         if (!$this->team) {
             return Redirect::to('/recruitment/teams');
         }
+
+        $this->addCss('assets/css/recruitment.css');
     }
 
     private function getTeamData()

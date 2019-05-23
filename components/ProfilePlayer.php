@@ -6,7 +6,7 @@ use Cms\Classes\ComponentBase;
 
 use Cleanse\Recruitment\Models\Player;
 
-class PlayerProfile extends ComponentBase
+class ProfilePlayer extends ComponentBase
 {
     private $player;
 
@@ -21,10 +21,10 @@ class PlayerProfile extends ComponentBase
     public function defineProperties()
     {
         return [
-            'player' => [
+            'character' => [
                 'title'       => 'Player Slug',
                 'description' => 'Player identification.',
-                'default'     => '{{ :player }}',
+                'default'     => '{{ :character }}',
                 'type'        => 'string',
             ]
         ];
@@ -37,13 +37,18 @@ class PlayerProfile extends ComponentBase
         if (!$this->player) {
             return Redirect::to('/recruitment/players');
         }
+
+        $this->addCss('assets/css/recruitment.css');
     }
 
     private function getPlayerData()
     {
-        $slug = $this->property('player');
+        $slug = $this->property('character');
 
-        $player = Player::where('slug', '=', $slug)->first();
+        $player = Player::where([
+            'slug'      => $slug,
+            'recruited' => 0
+        ])->first();
 
         return $player;
     }
