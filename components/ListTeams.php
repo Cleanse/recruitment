@@ -9,8 +9,9 @@ use Cleanse\Recruitment\Models\Team;
 
 class ListTeams extends ComponentBase
 {
-    private $filter;
-    private $value;
+    private $roles;
+    private $dcs;
+    private $regions;
 
     public function componentDetails()
     {
@@ -20,93 +21,91 @@ class ListTeams extends ComponentBase
         ];
     }
 
-    public function defineProperties()
-    {
-        return [
-            'filter' => [
-                'title'       => 'Filter By',
-                'description' => 'Filter identification.',
-                'default'     => '{{ :filter }}',
-                'type'        => 'string',
-            ],
-            'value' => [
-                'title'       => 'Filter Value',
-                'description' => 'The team filter value.',
-                'default'     => '{{ :value }}',
-                'type'        => 'string',
-            ]
-        ];
-    }
-
     public function onRun()
     {
-        $this->filter = $this->property('filter');
-        $this->checkFilter();
+        $this->page['teams'] = $this->checkFilter();
 
         $this->addCss('assets/css/recruitment.css');
+        $this->addJs('assets/js/recruitment.js');
+    }
+
+    public function onFilterTeams()
+    {
+        $this->page['teams'] = $this->checkFilter();
     }
 
     private function checkFilter()
     {
-        $filters = ['role', 'datacenter', 'region'];
+        $this->roles   = get('roles');
+        $this->regions = get('regions');
+        $this->dcs     = get('datacenters');
 
-        if (!$this->filter && !in_array($this->filter, $filters)) {
+        if (!$this->roles && !$this->regions && !$this->dcs) {
             return $this->page['teams'] = $this->getTeamList();
         }
 
-        $runFilter = 'getBy' . ucfirst($this->filter);
-
-        $this->$runFilter();
+        return $this->createFromURL();
     }
-    
+
     private function getTeamList()
     {
-        return Team::where([
-            'recruiting' => 1
-        ])->get();
+        return Team::where(['recruiting' => 1])
+            ->orderBy('name', 'asc')
+            ->get();
     }
 
-    private function getByRole()
+    private function createFromURL()
     {
-        $this->value = $this->property('value');
-        $roles = ['tank', 'healer', 'melee', 'ranged'];
+        $teams = Team::where('recruiting', '=', 1);
 
-        if ($this->value && !in_array($this->value, $roles)) {
-            return false;
+        if (!is_null(get('roles')) && !empty(get('roles'))) {
+            $jobs = explode(",", get('roles'));
+
+            $i = 1;
+            foreach ($jobs as $job) {
+                if ($i === 1) {
+                    $teams->where('availability', 'like', '%'.$job.'%');
+                } else {
+                    $teams->orWhere('availability', 'like', '%'.$job.'%');
+                }
+
+                $i++;
+            }
         }
 
-        return $this->page['teams'] = Team::where('recruiting', '=', 1)
-            ->where('availability', 'like', '%'.$this->value.'%')->get();
-    }
-
-    private function getByDatacenter()
-    {
-        $this->value = $this->property('value');
-        $dcs = [
-            'aether',
-            'chaos',
-            'crystal',
-            'elemental',
-            'gaia',
-            'light',
-            'mana',
-            'primal'
-        ];
-
-        if ($this->value && !in_array($this->value, $dcs)) {
-            return false;
+        $regionsList = [];
+        if (!is_null(get('datacenters')) && !empty(get('datacenters'))) {
+            $regionsList[] = explode(",", get('datacenters'));
         }
 
-        return $this->page['teams'] = Team::where('recruiting', '=', 1)
-            ->where('datacenter', '=', $this->value)->get();
+        if (!is_null(get('regions')) && !empty(get('regions'))) {
+            $regions = explode(",", get('regions'));
+
+            foreach ($regions as $region) {
+                $regionsList[] = $this->getByRegion($region);
+            }
+        }
+
+        if (count($regionsList) > 0) {
+            $a = [];
+            foreach ($regionsList as $r) {
+                foreach ($r as $key => $value) {
+                    $a[] = $value;
+                }
+            }
+
+            $teams->whereIn('datacenter', array_unique($a));
+        }
+
+        $teams->orderBy('name', 'asc');
+        return $teams->get();
     }
 
-    private function getByRegion()
+    private function getByRegion($region)
     {
-        $this->value = $this->property('value');
         $regionKeys = ['eu', 'jp', 'na'];
 
-        if ($this->value && !in_array($this->value, $regionKeys)) {
+        if ($region && !in_array($region, $regionKeys)) {
             return false;
         }
 
@@ -116,7 +115,6 @@ class ListTeams extends ComponentBase
             'na' => ['aether', 'crystal', 'primal']
         ];
 
-        return $this->page['teams'] = Team::where('recruiting', '=', 1)
-            ->whereIn('datacenter', $regions[$this->value])->get();
+        return $regions[$region];
     }
 }

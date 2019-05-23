@@ -12,63 +12,63 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="pvp-table">
-                    <div class="table text-white">
-                        <div class="thead">
-                            <span>Roles Needed</span>
-                            <span>Name</span>
-                            <span>Data Center</span>
-                        </div>
-                        {% for team in teams %}
-                        <a class="tr recruitment-team-link" href="/recruitment/team/{{ team.slug }}">
-                            <span>
-                                {% for role in team.availability %}
-                                <img class="recruitment-role-icon"
-                                     src="/plugins/cleanse/recruitment/assets/images/role-{{ role }}.png">
-                                {% endfor %}
-                            </span>
-                            <span>{{ team.name }}</span>
-                            <span>{{ team.datacenter|capitalize }}</span>
-                        </a>
-                        {% else %}
-                        <span></span>
-                        <span class="p-3">
-                            No teams match this criteria.
-                        </span>
-                        <span></span>
-                        {% endfor %}
+                    <div id="teamlist">
+                        {% partial __SELF__~'::_team_list' %}
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-4 side-bar">
                 <h4>Filter</h4>
-                <div class="sub-box mb-4"></div>
-                <p class="mb-0"><strong>By Role:</strong></p>
-                <ul>
-                    <li><a href="/recruitment/teams/role/tank">Tank</a></li>
-                    <li><a href="/recruitment/teams/role/healer">Healer</a></li>
-                    <li><a href="/recruitment/teams/role/melee">Melee</a></li>
-                    <li><a href="/recruitment/teams/role/ranged">Ranged</a></li>
-                </ul>
+                <div class="sub-box mb-1"></div>
+                <small class="d-block mb-4">Choose one or more of the options below:</small>
 
-                <p class="mb-0"><strong>By Datacenter:</strong></p>
-                <ul>
-                    <li><a href="/recruitment/teams/datacenter/aether">Aether</a></li>
-                    <li><a href="/recruitment/teams/datacenter/chaos">Chaos</a></li>
-                    <li><a href="/recruitment/teams/datacenter/crystal">Crystal</a></li>
-                    <li><a href="/recruitment/teams/datacenter/elemental">Elemental</a></li>
-                    <li><a href="/recruitment/teams/datacenter/gaia">Gaia</a></li>
-                    <li><a href="/recruitment/teams/datacenter/light">Light</a></li>
-                    <li><a href="/recruitment/teams/datacenter/mana">Mana</a></li>
-                    <li><a href="/recruitment/teams/datacenter/primal">Primal</a></li>
-                </ul>
+                <form id="filter_teams">
+                    <div class="form-group">
+                        <p class="mb-0"><strong>Roles</strong></p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="roles" type="checkbox" id="tankCheckbox" value="tank">
+                            <label class="form-check-label" for="tankCheckbox">Tank</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="roles" type="checkbox" id="healerCheckbox" value="healer">
+                            <label class="form-check-label" for="healerCheckbox">Healer</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="roles" type="checkbox" id="meleeCheckbox" value="melee">
+                            <label class="form-check-label" for="meleeCheckbox">Melee</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="roles" type="checkbox" id="rangedCheckbox" value="ranged">
+                            <label class="form-check-label" for="rangedCheckbox">Ranged</label>
+                        </div>
+                    </div>
 
-                <p class="mb-0"><strong>By Region:</strong></p>
-                <ul>
-                    <li><a href="/recruitment/teams/region/eu">Europe</a></li>
-                    <li><a href="/recruitment/teams/region/jp">Japan</a></li>
-                    <li><a href="/recruitment/teams/region/na">North America</a></li>
-                </ul>
+                    <div class="form-group">
+                        <label for="datacenters"><strong>Datacenter</strong></label>
+                        <select id="datacenters" name="datacenters" class="form-control">
+                            <option value="" selected>Select One</option>
+                            <option value="aether">Aether</option>
+                            <option value="chaos">Chaos</option>
+                            <option value="crystal">Crystal</option>
+                            <option value="elemental">Elemental</option>
+                            <option value="gaia">Gaia</option>
+                            <option value="light">Light</option>
+                            <option value="mana">Mana</option>
+                            <option value="primal">Primal</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regions"><strong>Region</strong></label>
+                        <select id="regions" name="regions" class="form-control">
+                            <option value="" selected>Select One</option>
+                            <option value="eu">Europe</option>
+                            <option value="jp">Japan</option>
+                            <option value="na">North America</option>
+                        </select>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

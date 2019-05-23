@@ -1,0 +1,27 @@
+<div class="table text-white">
+    <div class="thead">
+        <span>Roles Needed</span>
+        <span>Name</span>
+        <span>Datacenter</span>
+    </div>
+    {% for team in teams %}
+    <a class="tr recruitment-team-link" href="/recruitment/team/{{ team.slug }}">
+        <span>
+            {% for role in team.availability %}
+            <img class="recruitment-role-icon"
+                 src="/plugins/cleanse/recruitment/assets/images/role-{{ role }}.png">
+            {% endfor %}
+        </span>
+        <span>{{ team.name }}</span>
+        <span>{{ team.datacenter|capitalize }}</span>
+    </a>
+    {% else %}
+    <div class="tr">
+        <span class="d-block p-3">
+            No teams match this criteria.
+        </span>
+        <span></span>
+        <span></span>
+    </div>
+    {% endfor %}
+</div>
