@@ -1,0 +1,27 @@
+<div class="table text-white">
+    <div class="thead">
+        <span>Roles Played</span>
+        <span>Name</span>
+        <span>Server (Datacenter)</span>
+    </div>
+    {% for player in players %}
+    <a class="tr recruitment-team-link" href="/recruitment/player/{{ player.slug }}">
+        <span>
+            {% for role in player.roles %}
+            <img class="recruitment-role-icon"
+                 src="/plugins/cleanse/recruitment/assets/images/role-{{ role }}.png">
+            {% endfor %}
+        </span>
+        <span>{{ player.name }}</span>
+        <span>{{ player.server|capitalize }} ({{ player.datacenter|capitalize }})</span>
+    </a>
+    {% else %}
+    <div class="tr">
+        <span class="d-block p-3">
+            No players match this criteria.
+        </span>
+        <span></span>
+        <span></span>
+    </div>
+    {% endfor %}
+</div>

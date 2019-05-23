@@ -1,0 +1,76 @@
+<div class="basic-page">
+    <div class="container">
+        <div class="page-title">
+            <p class="text-small mb-0"><a href="/recruitment">Recruitment</a></p>
+            <h1>Player List</h1>
+            <div class="sub-box"></div>
+            <p class="mt-1 small text-primary">Looking to recruit for your team? Browse below!</p>
+        </div>
+    </div>
+
+    <div class="container basic-content">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="pvp-table">
+                    <div id="playerlist">
+                        {% partial __SELF__~'::_player_list' %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 side-bar">
+                <h4>Filter</h4>
+                <div class="sub-box mb-1"></div>
+                <small class="d-block mb-4">Choose one or more of the options below:</small>
+
+                <form id="filter_players">
+
+                <div class="form-group">
+                    <p class="mb-0"><strong>Roles</strong></p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="roles" type="checkbox" id="tankCheckbox" value="tank">
+                        <label class="form-check-label" for="tankCheckbox">Tank</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="roles" type="checkbox" id="healerCheckbox" value="healer">
+                        <label class="form-check-label" for="healerCheckbox">Healer</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="roles" type="checkbox" id="meleeCheckbox" value="melee">
+                        <label class="form-check-label" for="meleeCheckbox">Melee</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="roles" type="checkbox" id="rangedCheckbox" value="ranged">
+                        <label class="form-check-label" for="rangedCheckbox">Ranged</label>
+                    </div>
+                </div>
+
+                    <div class="form-group">
+                        <label for="datacenters"><strong>Datacenter</strong></label>
+                        <select id="datacenters" name="datacenters" class="form-control">
+                            <option value="" selected>Select One</option>
+                            <option value="aether">Aether</option>
+                            <option value="chaos">Chaos</option>
+                            <option value="crystal">Crystal</option>
+                            <option value="elemental">Elemental</option>
+                            <option value="gaia">Gaia</option>
+                            <option value="light">Light</option>
+                            <option value="mana">Mana</option>
+                            <option value="primal">Primal</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regions"><strong>Region</strong></label>
+                        <select id="regions" name="regions" class="form-control">
+                            <option value="" selected>Select One</option>
+                            <option value="eu">Europe</option>
+                            <option value="jp">Japan</option>
+                            <option value="na">North America</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
