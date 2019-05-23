@@ -90,14 +90,15 @@ class ListPlayers extends ComponentBase
             $players->whereIn('datacenter', array_unique($a));
         }
 
+        $players->orderBy('name', 'asc');
         return $players->get();
     }
     
     private function getPlayerList()
     {
-        return Player::where([
-            'recruited' => 0
-        ])->get();
+        return Player::where(['recruited' => 0])
+            ->orderBy('name', 'asc')
+            ->get();
     }
 
     private function getByRegion($region)
