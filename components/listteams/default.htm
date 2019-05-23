@@ -69,6 +69,14 @@
                         </select>
                     </div>
                 </form>
+
+                <hr>
+
+                {% if user %}
+                <h4>Welcome, {{ user.name }}</h4>
+                <a class="btn btn-outline-primary btn-sm btn-block"
+                   href="/recruitment/create/team">Add A Team</a>
+                {% endif %}
             </div>
         </div>
     </div>
