@@ -7,7 +7,7 @@
             <h1>{{ team.name }}</h1>
             <div class="sub-box"></div>
             <p class="mt-1 small text-primary">
-                <a href="/recruitment/teams/datacenter/{{ team.datacenter }}">{{ team.datacenter|capitalize }}</a>
+                <a href="/recruitment/teams?datacenters={{ team.datacenter }}">{{ team.datacenter|capitalize }}</a>
             </p>
         </div>
     </div>

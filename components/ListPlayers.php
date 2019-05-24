@@ -52,14 +52,17 @@ class ListPlayers extends ComponentBase
         $players = Player::where('recruited', '=', 0);
 
         if (!is_null(get('roles')) && !empty(get('roles'))) {
-            $jobs = explode(",", get('roles'));
+            $jobs = explode(',', get('roles'));
 
             $i = 1;
             foreach ($jobs as $job) {
                 if ($i === 1) {
-                    $players->where("roles", "like", "%\"{$job}\"%");
+                    $players->where('roles', 'like', '%'.$job.'%');
                 } else {
-                    $players->orWhere("roles", "like", "%\"{$job}\"%");
+                    $players->orWhere(function($query) use ($job) {
+                        $query->where('recruited', '=', 0)
+                              ->where('roles', 'like', '%' . $job . '%');
+                    });
                 }
 
                 $i++;

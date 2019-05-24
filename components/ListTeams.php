@@ -66,7 +66,11 @@ class ListTeams extends ComponentBase
                 if ($i === 1) {
                     $teams->where('availability', 'like', '%'.$job.'%');
                 } else {
-                    $teams->orWhere('availability', 'like', '%'.$job.'%');
+                    $teams->orWhere(function($query) use ($job)
+                    {
+                        $query->where('recruiting', '=', 1)
+                              ->where('availability', 'like', '%'.$job.'%');
+                    });
                 }
 
                 $i++;
