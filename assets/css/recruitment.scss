@@ -60,3 +60,27 @@
   background-color: #131313;
   border: 1px solid rgba(255, 221, 95, 0.5);
 }
+
+.recruitment-banner {
+  display: flex;
+  flex-direction: column;
+  min-height: 350px;
+  background: url('../images/recruitment-board.jpg') no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1;
+    background: rgba(0, 0, 0, .69);
+    font-size: 2rem;
+
+    &:hover {
+      color: #212529;
+      background-color: #FFDD5F;
+      border-color: #FFDD5F;
+    }
+  }
+}
