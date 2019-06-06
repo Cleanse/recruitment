@@ -25,7 +25,7 @@ class Home extends ComponentBase
             $this->page['user_characters'] = $this->getUserPlayers();
         }
 
-        $this->addCss('assets/css/recruitment.css');
+        $this->addCss('assets/css/recruitment.css?v2');
     }
 
     private function getUserTeams()

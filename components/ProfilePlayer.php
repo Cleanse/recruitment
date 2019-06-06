@@ -2,6 +2,7 @@
 
 namespace Cleanse\Recruitment\Components;
 
+use Redirect;
 use Cms\Classes\ComponentBase;
 
 use Cleanse\Recruitment\Models\Player;

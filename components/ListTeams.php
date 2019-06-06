@@ -50,7 +50,7 @@ class ListTeams extends ComponentBase
     private function getTeamList()
     {
         return Team::where(['recruiting' => 1])
-            ->orderBy('name', 'asc')
+            ->orderBy('created_at', 'desc')
             ->get();
     }
 

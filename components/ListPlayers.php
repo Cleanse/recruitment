@@ -100,7 +100,7 @@ class ListPlayers extends ComponentBase
     private function getPlayerList()
     {
         return Player::where(['recruited' => 0])
-            ->orderBy('name', 'asc')
+            ->orderBy('created_at', 'desc')
             ->get();
     }
 
