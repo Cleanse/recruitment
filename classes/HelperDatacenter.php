@@ -79,12 +79,14 @@ class HelperDatacenter
             'Moogle',
             'Omega',
             'Ragnarok',
+            'Spriggan'
         ],
         'Light' => [
             'Lich',
             'Odin',
             'Phoenix',
             'Shiva',
+            'Twintania',
             'Zodiark'
         ]
     ];
